@@ -24,7 +24,7 @@ app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 const start = async () => {
     try{
-       await connectDB("mongodb+srv://sarvesh:sarvesh2002@cluster0.anzgr.mongodb.net/Events?retryWrites=true&w=majority")
+       await connectDB(process.env.MONGODB_URI)
       app.listen(port , console.log(`Server started at port ${port}`))
     } catch(err) {
         console.log(err)
