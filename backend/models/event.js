@@ -10,8 +10,6 @@ const eventSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    minlength: [10, "Description must be at least 3 characters long"],
-    maxlength: [500, "Description must be at most 500 characters long"],
   },
   date: {
     type: String,

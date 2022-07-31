@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Field, Formik, Form } from "formik";
-import axios from "axios";
 import { Button, ButtonGroup } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "./MultiStepForm.css";
@@ -12,6 +11,8 @@ const MultiStepForm = () => {
   const [formOne, setFormOne] = useState({});
   const [formTwo, setFormTwo] = useState({});
   const [formThree, setFormThree] = useState({});
+  const [mode,setMode] = useState('');
+  const [theme,setTheme] = useState('')
 
   const [submit, setSubmit] = useState(false);
   const nextStep = () => {
@@ -25,15 +26,36 @@ const MultiStepForm = () => {
     window.scrollTo(0, 0);
     setStepNumber(stepNumber - 1);
   };
+
+  const handleClick = async () => {
+    let event = await fetch(`http://localhost:5000/api/addEvent`,{
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        title:formOne.title,
+        description:formOne.description,
+        mode:mode,
+        theme:theme
+
+      })
+ })
+
+let result = await event.json()
+console.log(result)
+ }
+
+ console.log(mode)
   //"http://localhost:5000/api/addEvent"
   useEffect(() => {
-    if (submit) {
-      axios.post(console.log(formOne, formTwo, formThree), {
-        formOne,
-        formTwo,
-        formThree,
-      });
-    }
+    // if (submit) {
+    //   axios.post(console.log(formOne, formTwo, formThree), {
+    //     formOne,
+    //     formTwo,
+    //     formThree,
+    //   });
+    // }
   }, [formOne, formThree, formTwo, submit]);
   const RangeDisplay = () => {
     return (
@@ -217,12 +239,12 @@ const MultiStepForm = () => {
               Mode of Conduction
             </label>
             <div role="group" aria-labelledby="my-radio-group">
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setMode('Online')}}>
                 <Field type="radio" name="mode" value="Online" required />
                 Online
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label"  onChange={() => {setMode('In-Person')}}>
                 <Field type="radio" name="mode" value="In-Person" required />
                 In-Person
               </label>
@@ -231,37 +253,37 @@ const MultiStepForm = () => {
               Theme of the event
             </label>
             <div role="group" aria-labelledby="my-radio-group">
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Sports')}}>
                 <Field type="radio" name="theme" value="Sports" required />
                 Sports
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Tech')}}>
                 <Field type="radio" name="theme" value="Tech" required />
                 Tech
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Art')}}>
                 <Field type="radio" name="theme" value="Art" required />
                 Art
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Music')}}>
                 <Field type="radio" name="theme" value="Music" required />
                 Music
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Food')}}>
                 <Field type="radio" name="theme" value="Food" required />
                 Food
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Literature')}}>
                 <Field type="radio" name="theme" value="Literature" required />
                 Literature
               </label>
               <br></br>
-              <label className="form3label">
+              <label className="form3label" onChange={() => {setTheme('Others')}}>
                 <Field type="radio" name="theme" value="Others" required />
                 Others
               </label>
@@ -275,6 +297,7 @@ const MultiStepForm = () => {
                 type="submit"
                 className="btn-next"
                 title="Next Step"
+                onClick={() => {handleClick()}}
               >
                 Submit
               </Button>

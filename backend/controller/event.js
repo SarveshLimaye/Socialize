@@ -33,15 +33,15 @@ const addEvent = asyncHandler(async(req,res) => {
             _id: event._id,
             title: event.title,
             description: event.description,
-            date: event.date,
-            time: event.time,
+            // date: event.date,
+            // time: event.time,
             mode: event.mode,
-            location: event.location,
-            totalAttendees: event.totalAttendees,
-            price: event.price,
+            // location: event.location,
+            // totalAttendees: event.totalAttendees,
+            // price: event.price,
             theme: event.theme,
-            image: event.image,
-            createdBy: event.createdBy
+            // image: event.image,
+            // createdBy: event.createdBy
         })
     } else{
         res.status(400)
