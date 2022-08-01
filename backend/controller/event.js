@@ -41,7 +41,7 @@ const addEvent = asyncHandler(async(req,res) => {
             // price: event.price,
             theme: event.theme,
             // image: event.image,
-            // createdBy: event.createdBy
+            createdBy: event.createdBy
         })
     } else{
         res.status(400)

@@ -13,19 +13,16 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-<<<<<<< HEAD
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/event" element={<Event />} />
-=======
         <Route exact path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/event" element={<Event/>} />
         <Route path="/onlineEvent" element={<OnlineEvent/>} />
         <Route path="/inpersonEvent" element = {<InPersonEvent/>}/>
->>>>>>> f67f024db303d4e9f41a75acf2291f5ecc8cd475
       </Routes>
     </Router>
   );
