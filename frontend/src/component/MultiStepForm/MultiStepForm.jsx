@@ -3,6 +3,7 @@ import { Field, Formik, Form } from "formik";
 import { Button, ButtonGroup } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "./MultiStepForm.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,7 +14,7 @@ const MultiStepForm = () => {
   const [formThree, setFormThree] = useState({});
   const [mode,setMode] = useState('');
   const [theme,setTheme] = useState('')
-
+  const {user } = useAuth0();
   const [submit, setSubmit] = useState(false);
   const nextStep = () => {
     if (stepNumber === 2) {
@@ -26,7 +27,7 @@ const MultiStepForm = () => {
     window.scrollTo(0, 0);
     setStepNumber(stepNumber - 1);
   };
-
+ console.log(user);
   const handleClick = async () => {
     let event = await fetch(`http://localhost:5000/api/addEvent`,{
       method:"POST",
@@ -37,8 +38,8 @@ const MultiStepForm = () => {
         title:formOne.title,
         description:formOne.description,
         mode:mode,
-        theme:theme
-
+        theme:theme,
+        createdBy:user.email,
       })
  })
 

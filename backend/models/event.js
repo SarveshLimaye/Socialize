@@ -25,7 +25,7 @@ const eventSchema = new mongoose.Schema({
     required: false,
   },
   createdBy: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: String,
     ref: "User",
     required: false,
   },
@@ -51,6 +51,11 @@ const eventSchema = new mongoose.Schema({
     default: 0,
     required: false,
   },
+  attendees :{
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "User",
+    required: false,
+  }
 });
 
 module.exports = mongoose.model("Event", eventSchema);
